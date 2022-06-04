@@ -1,0 +1,43 @@
+.wrapper {
+  display: flex;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.episode {
+  color: var(--light-purple);
+  margin: 5px;
+  padding: 9px;
+  color: white;
+  transition: all 0.3s ease-in-out;
+}
+
+.episode:hover {
+  background-color: var(--light-purple);
+  cursor: pointer;
+}
+
+.title {
+  color: var(--light-purple);
+  text-align: center;
+}
+
+.wrap-input {
+  margin-top: 20px;
+}
+
+.input {
+  background-color: var(--light-purple-10);
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 6px;
+  color: var(--light-yellow);
+  outline: none;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.input::placeholder {
+  color: var(--light-purple);
+}

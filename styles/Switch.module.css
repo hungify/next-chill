@@ -1,0 +1,20 @@
+.btn {
+  line-height: 0;
+  padding: 5px;
+  border: none;
+  filter: brightness(0.9);
+
+  font-size: 14px;
+  border-radius: 999px;
+  line-height: normal;
+  border: 0;
+  font-weight: 400;
+  text-transform: none;
+  text-align: center;
+  cursor: pointer;
+  height: 35px;
+}
+
+.btn:hover {
+  background-color: hsla(0, 0%, 100%, 0.1);
+}

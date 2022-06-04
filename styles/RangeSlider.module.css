@@ -1,0 +1,16 @@
+.wrapper {
+  margin-top: 20px;
+}
+
+.range {
+  width: 100%;
+  -webkit-appearance: none;
+  outline: none;
+  height: 0;
+  cursor: pointer;
+}
+
+.range-slider {
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,0 +1,25 @@
+.select {
+  width: 100%;
+  border-radius: 0.25rem;
+  font-size: 1.25rem;
+  cursor: pointer;
+  display: grid;
+  grid-template-areas: "select";
+  align-items: center;
+  color: rgb(255, 224, 177);
+  background: rgba(172, 167, 232, 0.34);
+  border: none;
+}
+.select:after {
+  grid-area: select;
+}
+
+.select::after {
+  margin: 0 0.5rem;
+  content: "";
+  width: 0.8em;
+  height: 0.5em;
+  background-color: var(--select-arrow);
+  clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+  justify-self: end;
+}

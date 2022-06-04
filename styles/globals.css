@@ -1,0 +1,65 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
+    Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --navy: #2c3281;
+  --light-purple: #aca7e8;
+  --light-yellow: #ffe0b1;
+  --white: white;
+  --light-purple-30: rgba(172, 167, 232, 0.3411764705882353);
+  --light-purple-10: rgba(172, 167, 232, 0.13333333333333333);
+
+  --select-border: rgba(172, 167, 232);
+  --select-focus: rgb(44, 50, 129);
+  --select-arrow: var(--select-border);
+}
+
+select {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  padding: 0.5rem;
+  margin: 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
+  grid-area: select;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+select:focus {
+  outline: none;
+}
+
+option {
+  white-space: normal;
+  outline-color: var(--select-focus);
+}
+
+iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

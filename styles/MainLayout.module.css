@@ -1,0 +1,12 @@
+.layout {
+  background: linear-gradient(
+    150deg,
+    rgba(62, 70, 166, 1) 16%,
+    rgba(151, 108, 181, 1) 58%,
+    rgba(255, 171, 137, 1) 100%
+  );
+  height: 100vh;
+  color: var(--light-yellow);
+  font-size: 14px;
+  padding: 50px;
+}
