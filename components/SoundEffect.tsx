@@ -1,57 +1,80 @@
 import React from "react";
+import useGlobalStore from "~/app/stores/store";
 import Dropdown from "~/components/elements/Dropdown";
 import Switch from "~/components/elements/Switch";
 import RangeSlider from "~/components/RangeSlider";
-import backgroundData from "~/mocks/background";
+import sounds from "~/mocks/sounds";
 import type { DropdownOption } from "~/models/Dropdown";
-import type { Sound, SoundType } from "~/models/Sound";
-import type { SwitchType } from "~/models/Switch";
+import type { SoundType } from "~/models/Sound";
 import styles from "../styles/SoundEffect.module.css";
 
 export default function SoundEffect() {
-  const [currentBackground, setCurrentBackground] = React.useState<Sound>();
-  const [background, setBackground] = React.useState<Array<DropdownOption>>();
-  const [sliderValue, setSliderValue] = React.useState(0);
+  const store = useGlobalStore();
+
+  const [soundEffect, setSoundEffect] = React.useState<Array<DropdownOption>>();
+  const [audio, setAudio] = React.useState<HTMLAudioElement>();
 
   React.useEffect(() => {
-    const backgroundPersist = localStorage.getItem("currentSoundEffect") as SoundType;
-    const defaultSelection = backgroundPersist
-      ? backgroundData[backgroundPersist]
-      : backgroundData.rain;
-
-    setCurrentBackground(defaultSelection);
-
-    const keys = Object.keys(backgroundData) as SoundType[];
+    setAudio(new Audio(store.sound?.url));
+    const keys = Object.keys(sounds) as SoundType[];
     const titleAndValue = keys.map((key) => ({
-      label: backgroundData[key].label,
+      label: sounds[key].label,
       value: key,
     }));
-    setBackground(titleAndValue);
+    setSoundEffect(titleAndValue);
   }, []);
+
+  React.useEffect(() => {
+    if (audio) {
+      audio.volume = store.soundVolume;
+      if (store.isPlaying) {
+        audio.play();
+      } else {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    }
+  }, [store.isPlaying, store.soundVolume, audio]);
 
   const handleOnChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
     const value = evt.target.value as SoundType;
-    const background = backgroundData[value];
-    setCurrentBackground(background);
+    const sound = sounds[value];
+    if (audio) {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+    setAudio(new Audio(sound.url));
+    store.setSound(sound);
   };
 
-  const handleToggle = (value: SwitchType) => {
-    console.log(value);
+  const handleToggle = (isPlaying: boolean) => {
+    store.setIsPlaying(isPlaying);
+    if (audio) {
+      if (isPlaying) {
+        audio.play();
+      } else {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    }
   };
 
-  const handleRangeSliderChange = React.useCallback(() => {
-    setSliderValue(sliderValue);
-  }, [sliderValue]);
+  const handleRangeSliderChange = (value: number) => {
+    store.setSoundVolume(value / 100);
+    if (audio) {
+      audio.volume = value / 100;
+    }
+  };
 
   return (
     <div className={styles["wrapper"]}>
-      <audio className={styles["checkbox"]} id="backgroundAudio" src="" loop></audio>
+      <audio loop />
       <p className="center">Sound Effect</p>
-      {background && currentBackground && (
+      {soundEffect && store.sound && (
         <Dropdown
-          label={currentBackground.label}
-          options={background}
-          value={currentBackground.value}
+          label={store.sound.label}
+          options={soundEffect}
+          value={store.sound.value}
           onChange={handleOnChange}
         />
       )}
@@ -59,12 +82,12 @@ export default function SoundEffect() {
         <p>Volume</p>
         <RangeSlider
           classes="additional-css-classes"
-          min={0}
           max={100}
-          value={sliderValue}
+          min={0}
+          value={store.soundVolume * 100}
           onChange={handleRangeSliderChange}
         />
-        <Switch onClick={handleToggle} />
+        <Switch onClick={handleToggle} value={store.isPlaying} />
       </div>
     </div>
   );

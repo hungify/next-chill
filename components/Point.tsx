@@ -14,11 +14,7 @@ export default function Point({ playlistName, list }: PointProps) {
   const [currentIndex, setIndex] = React.useState(defaultIndex);
   const [videoUrl, setVideoUrl] = React.useState("");
 
-  const handleOnClick = () => {
-    // const playlistData = Utility.getVideoId(this.props.link);
-    // const loadData = Utility.setLoadData(playlistData);
-    // Utility.playPlaylist(loadData);
-  };
+  const handleOnClick = () => {};
 
   const handleVideoUrlChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setVideoUrl(evt.target.value);
@@ -26,13 +22,6 @@ export default function Point({ playlistName, list }: PointProps) {
 
   const handleFormSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    // const playlistData = Utility.getVideoId(this.state.value);
-    // if (playlistData === null) return; // URL was invalid.
-
-    // const loadData = Utility.setLoadData(playlistData);
-    // Utility.playPlaylist(loadData);
-    // localStorage.setItem("currentPlaylist", "own");
-    // localStorage.setItem("customUrl", this.state.value);
   };
   return (
     <div className={styles["wrapper"]}>
