@@ -17,7 +17,7 @@
   transition: all 0.4s ease-in-out;
 
   background-image: linear-gradient(to right, #ed6ea0, #ec8c69, #f7186a, #fbb03b);
-  box-shadow: 0 4px 15px 0 rgba(236, 116, 149, 0.75);
+  box-shadow: 0 4px 15px 0 var(--pink);
 }
 
 .episode:hover {
@@ -29,7 +29,7 @@
 
 .episode--active {
   background-image: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
-  box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
+  box-shadow: 0 4px 15px 0 var(--green);
 }
 
 .title {

@@ -6,6 +6,7 @@ import type { DropdownOption } from "~/models/Dropdown";
 import Point from "~/components/Point";
 import styles from "../styles/Playlist.module.css";
 import useGlobalStore from "~/app/stores/store";
+import { getEmbedId, getListId } from "~/utils/youtube";
 
 export default function Playlist() {
   const [list, setList] = React.useState<Array<DropdownOption>>();
@@ -27,6 +28,18 @@ export default function Playlist() {
     store.setPlayList(playlist);
   };
 
+  const handleSubmitMyPlaylist = (url: string) => {
+    const embedId = getEmbedId(url);
+    const listId = getListId(url);
+    if (embedId) {
+      store.setEmbedId(embedId);
+      store.setListId("");
+    } else if (listId) {
+      store.setEmbedId("");
+      store.setListId(listId);
+    }
+  };
+
   return (
     <div className={styles["wrapper"]}>
       <p className="center">Choose a playlist</p>
@@ -38,7 +51,13 @@ export default function Playlist() {
           onChange={handleOnChange}
         />
       )}
-      {store.playList && <Point playlistName={store.playList.value} list={store.playList.list} />}
+      {store.playList && (
+        <Point
+          playlistName={store.playList.value}
+          list={store.playList.list}
+          onSubmit={handleSubmitMyPlaylist}
+        />
+      )}
     </div>
   );
 }

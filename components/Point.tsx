@@ -6,9 +6,10 @@ import styles from "../styles/Point.module.css";
 interface PointProps {
   playlistName: string;
   list: string[] | undefined;
+  onSubmit: (url: string) => void;
 }
 
-export default function Point({ list }: PointProps) {
+export default function Point({ list, onSubmit }: PointProps) {
   const store = useGlobalStore();
 
   const [videoUrl, setVideoUrl] = React.useState("");
@@ -27,6 +28,7 @@ export default function Point({ list }: PointProps) {
         store.setEmbedId("");
         store.setListId(listId);
       }
+      store.setEqualizer(true);
     };
   };
 
@@ -36,6 +38,8 @@ export default function Point({ list }: PointProps) {
 
   const handleFormSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+    onSubmit(videoUrl);
+    store.setEqualizer(true);
   };
   return (
     <div className={styles["wrapper"]}>

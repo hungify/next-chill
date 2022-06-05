@@ -28,7 +28,6 @@ const playlist: Record<PlaylistType, Playlist> = {
     title: "Animation",
     value: "anime",
     list: [
-      "https://www.youtube.com/watch?v=NAbQimfaRyw",
       "https://youtube.com/playlist?list=PL5FeYIiqkJGo3f96VYm4nkJXQZOXLV7Bv",
       "https://youtube.com/playlist?list=PL5FeYIiqkJGqxzZ3WCbsw0P__gNN2a7K7",
       "https://youtube.com/playlist?list=PL5FeYIiqkJGqMqAf8o-_Qh60WZ25VkZCb",
