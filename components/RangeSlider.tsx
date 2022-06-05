@@ -6,10 +6,9 @@ interface RangeSliderProps {
   max: number;
   value: number;
   onChange: (value: number) => void;
-  classes?: string;
 }
 
-function RangeSlider({ classes, onChange, value }: RangeSliderProps) {
+function RangeSlider({ onChange, value }: RangeSliderProps) {
   const [sliderValue, setSliderValue] = React.useState(0);
   const [mouseState, setMouseState] = React.useState<string>();
 
@@ -29,11 +28,16 @@ function RangeSlider({ classes, onChange, value }: RangeSliderProps) {
 
   return (
     <div className={styles["range-slider"]}>
+      <span
+        className={styles["range-slider__value"]}
+        style={{
+          width: `${sliderValue}%`,
+        }}
+      />
       <input
         type="range"
         value={sliderValue}
-        className={`slider ${classes}`}
-        id="myRange"
+        className={styles["range-slider__input"]}
         onChange={handleOnChange}
         onMouseDown={() => setMouseState("down")}
         onMouseUp={() => setMouseState("up")}
