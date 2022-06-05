@@ -1,4 +1,6 @@
 import React from "react";
+import useGlobalStore from "~/app/stores/store";
+import { getEmbedId, getListId } from "~/utils/youtube";
 import styles from "../styles/Point.module.css";
 
 interface PointProps {
@@ -6,15 +8,27 @@ interface PointProps {
   list: string[] | undefined;
 }
 
-export default function Point({ playlistName, list }: PointProps) {
-  const pointPersist = localStorage.getItem("point");
-  const defaultIndex = pointPersist ? pointPersist : 0;
+export default function Point({ list }: PointProps) {
+  const store = useGlobalStore();
 
-  const [currentPlaylist, setPlaylist] = React.useState();
-  const [currentIndex, setIndex] = React.useState(defaultIndex);
   const [videoUrl, setVideoUrl] = React.useState("");
 
-  const handleOnClick = () => {};
+  const handleOnClick = (url: string, index: number) => {
+    return () => {
+      store.setEpisode(index);
+
+      const embedId = getEmbedId(url);
+      const listId = getListId(url);
+
+      if (embedId) {
+        store.setEmbedId(embedId);
+        store.setListId("");
+      } else if (listId) {
+        store.setEmbedId("");
+        store.setListId(listId);
+      }
+    };
+  };
 
   const handleVideoUrlChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setVideoUrl(evt.target.value);
@@ -26,11 +40,16 @@ export default function Point({ playlistName, list }: PointProps) {
   return (
     <div className={styles["wrapper"]}>
       {list ? (
-        list.map((item, index) => (
+        list.map((url, index) => (
           <React.Fragment key={index}>
-            <p className={styles["episode"]} onClick={handleOnClick}>
+            <button
+              className={`${styles["episode"]} ${
+                store.episode === index && styles["episode--active"]
+              }`}
+              onClick={handleOnClick(url, index)}
+            >
               {index}
-            </p>
+            </button>
           </React.Fragment>
         ))
       ) : (

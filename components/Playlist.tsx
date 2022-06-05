@@ -5,50 +5,40 @@ import Dropdown from "~/components/elements/Dropdown";
 import type { DropdownOption } from "~/models/Dropdown";
 import Point from "~/components/Point";
 import styles from "../styles/Playlist.module.css";
+import useGlobalStore from "~/app/stores/store";
 
 export default function Playlist() {
-  const [currentPlaylist, setCurrentPlaylist] = React.useState<Playlist>();
-  const [playlist, setPlaylist] = React.useState<Array<DropdownOption>>();
+  const [list, setList] = React.useState<Array<DropdownOption>>();
+
+  const store = useGlobalStore();
 
   React.useEffect(() => {
-    const listTypePersist: PlaylistType = localStorage.getItem("listType") as PlaylistType;
-    const defaultSelection = listTypePersist ? playlistData[listTypePersist] : playlistData.lofi;
-    setCurrentPlaylist(defaultSelection);
-
     const keys = Object.keys(playlistData) as PlaylistType[];
     const titleAndValue = keys.map((key) => ({
       label: playlistData[key].title,
       value: key,
     }));
-    setPlaylist(titleAndValue);
+    setList(titleAndValue);
   }, []);
 
   const handleOnChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
     const value = evt.target.value as PlaylistType;
     const playlist = playlistData[value];
-    setCurrentPlaylist(playlist);
+    store.setPlayList(playlist);
   };
 
   return (
     <div className={styles["wrapper"]}>
       <p className="center">Choose a playlist</p>
-      {playlist && currentPlaylist && (
+      {list && store.playList && (
         <Dropdown
-          label={currentPlaylist.title}
-          value={currentPlaylist.value}
-          options={playlist}
+          label={store.playList.title}
+          value={store.playList.value}
+          options={list}
           onChange={handleOnChange}
-          // select={{ value: currentPlaylist.value }}
-          // arrowUpIcon={<ArrowUpIcon />}
-          // arrowDownIcon={<ArrowDownIcon />}
         />
       )}
-      {currentPlaylist && (
-        <Point
-          playlistName={currentPlaylist.value}
-          list={playlistData[currentPlaylist.value].list}
-        />
-      )}
+      {store.playList && <Point playlistName={store.playList.value} list={store.playList.list} />}
     </div>
   );
 }
