@@ -79,9 +79,7 @@ export default function SoundEffect() {
         />
       )}
       <div className={styles["play-sound"]}>
-        <p>Volume</p>
         <RangeSlider
-          classes="additional-css-classes"
           max={100}
           min={0}
           value={store.soundVolume * 100}
