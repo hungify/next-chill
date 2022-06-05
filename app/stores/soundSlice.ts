@@ -22,11 +22,11 @@ const initialState: SoundSlice = {
 
 const createSoundSlice: StoreSlice<SoundSlice> = (set) => ({
   ...initialState,
-  setSound: (sound: Sound) => set((state) => ({ ...state, sound })),
+  setSound: (sound) => set((state) => ({ ...state, sound })),
 
-  setIsPlaying: (isPlaying: boolean) => set((state) => ({ ...state, isPlaying })),
+  setIsPlaying: (isPlaying) => set((state) => ({ ...state, isPlaying })),
 
-  setSoundVolume: (soundVolume: number) => set((state) => ({ ...state, soundVolume })),
+  setSoundVolume: (soundVolume) => set((state) => ({ ...state, soundVolume })),
 });
 
 export default createSoundSlice;
