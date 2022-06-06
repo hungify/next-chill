@@ -22,6 +22,7 @@ export default function SoundEffect() {
       value: key,
     }));
     setSoundEffect(titleAndValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   React.useEffect(() => {

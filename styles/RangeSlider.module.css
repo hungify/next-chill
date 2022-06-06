@@ -1,5 +1,6 @@
 .range-slider {
   width: var(--range-width);
+  margin-right: 15px;
 }
 
 .range-slider__input {

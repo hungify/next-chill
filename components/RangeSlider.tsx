@@ -24,6 +24,7 @@ function RangeSlider({ onChange, value }: RangeSliderProps) {
     if (mouseState === "up") {
       onChange(sliderValue);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mouseState]);
 
   return (
