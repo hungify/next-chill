@@ -15,7 +15,7 @@ export default function YoutubeEmbed({ embedId, listId }: YoutubeEmbedProps) {
         src={src}
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        title="Embedded youtube"
+        title="Just chill"
       />
     </div>
   );

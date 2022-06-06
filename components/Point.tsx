@@ -28,7 +28,6 @@ export default function Point({ list, onSubmit }: PointProps) {
         store.setEmbedId("");
         store.setListId(listId);
       }
-      store.setEqualizer(true);
     };
   };
 
@@ -39,7 +38,6 @@ export default function Point({ list, onSubmit }: PointProps) {
   const handleFormSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     onSubmit(videoUrl);
-    store.setEqualizer(true);
   };
   return (
     <div className={styles["wrapper"]}>
